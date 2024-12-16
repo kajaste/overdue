@@ -1,10 +1,9 @@
 import random
-from typing import Final, Optional
+from typing import Final
 
 import pytest
 
-from overdue import timeout_set_to, TaskAbortedError, timecapped_to
-from overdue.stopper import in_time_or_none
+from overdue import timeout_set_to, TaskAbortedError, timecapped_to, in_time_or_none
 
 _very_large_number: Final = 999_999_999_999_999
 
