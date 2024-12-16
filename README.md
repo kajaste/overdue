@@ -4,6 +4,9 @@ Ships with type annotations and depends at runtime on nothing but Python itself.
 
 For older Pythons, consider [stopit](https://github.com/glenfant/stopit).
 
+## Installation
+`$ pip install overdue` or whatever is the equivalent in your favorite package manager.
+
 ## Using a context manager
 Without exceptions:
 ```python
