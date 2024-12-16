@@ -1,13 +1,18 @@
 [project]
 name = "overdue"
-version = "0.1.2"
+version = "0.1.3"
 description = "Easy timeout actions for any Python code with contextmanagers or decorators"
 readme = "README.md"
 authors = [
-    { name = "Antti Kajander", email = "kajaste@users.noreply.github.com" }
+    { name = "Antti Kajander", email = "9019523+kajaste@users.noreply.github.com" }
 ]
+keywords = ["timeout", "performance", "scalability", "error-handling", "exception"]
+license = {text = "MIT License"}
 requires-python = ">=3.10"
 dependencies = []
+
+[project.urls]
+source = "https://github.com/kajaste/overdue"
 
 [build-system]
 requires = ["hatchling"]

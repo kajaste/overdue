@@ -2,12 +2,12 @@ import threading
 from abc import ABC, abstractmethod
 from contextlib import contextmanager
 
-from typing import final, Iterator
+from typing import final, Iterator, Final
 
 
 class OverdueAction(ABC):
     def __init__(self, seconds: float):
-        self.timer = threading.Timer(seconds, self._action)
+        self.timer: Final = threading.Timer(seconds, self._action)
 
     @abstractmethod
     def _action(self) -> None:
@@ -22,6 +22,7 @@ class OverdueAction(ABC):
     def disarm(self) -> None:
         self.timer.cancel()
 
+    @final
     @contextmanager
     def armed(self) -> Iterator[None]:
         try:
