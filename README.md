@@ -21,11 +21,11 @@ With an exception:
 ```python
 from overdue import timeout_set_to, TaskAbortedError
 
-with timeout_set_to(0.25, raise_exception=True):
-    try:
+try:
+    with timeout_set_to(0.25, raise_exception=True):
         # Slow code
-    except TaskAbortedError:
-        # Handle timeout
+except TaskAbortedError:
+    # Handle timeout
 ```
 
 ## Using a decorator
