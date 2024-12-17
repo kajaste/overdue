@@ -3,6 +3,7 @@ import sys
 import threading
 from contextlib import contextmanager
 from dataclasses import dataclass
+from datetime import timedelta
 from functools import wraps
 from typing import Iterator, TypeVar, Callable, ParamSpec, Optional, Final
 
@@ -38,7 +39,7 @@ def raise_in_thread(thread_id: int, exception: type[Exception]) -> None:
 
 
 class Stopper(OverdueAction):
-    def __init__(self, seconds: float):
+    def __init__(self, seconds: float | timedelta):
         super().__init__(seconds)
         self.target_thread_id: Final = get_current_thread_id()
 
@@ -53,10 +54,10 @@ class TimeoutResult:
 
 
 @contextmanager
-def timeout_set_to(after_seconds: float, *, raise_exception: bool = False) -> Iterator[TimeoutResult]:
+def timeout_set_to(seconds: float | timedelta, *, raise_exception: bool = False) -> Iterator[TimeoutResult]:
     timeout_result = TimeoutResult(triggered=False)
     try:
-        with Stopper(after_seconds).armed():
+        with Stopper(seconds).armed():
             yield timeout_result
     except TaskAbortedError as e:
         timeout_result.triggered = True
@@ -68,7 +69,7 @@ T = TypeVar("T")
 P = ParamSpec("P")
 
 
-def timecapped_to(seconds: float) -> Callable[[Callable[P, T]], Callable[P, T]]:
+def timecapped_to(seconds: float | timedelta) -> Callable[[Callable[P, T]], Callable[P, T]]:
     def timecap_decorator(f: Callable[P, T]) -> Callable[P, T]:
         @wraps(f)
         def timecap_wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
@@ -78,7 +79,7 @@ def timecapped_to(seconds: float) -> Callable[[Callable[P, T]], Callable[P, T]]:
     return timecap_decorator
 
 
-def in_time_or_none(seconds: float) -> Callable[[Callable[P, T]], Callable[P, Optional[T]]]:
+def in_time_or_none(seconds: float | timedelta) -> Callable[[Callable[P, T]], Callable[P, Optional[T]]]:
     def timecap_decorator(f: Callable[P, T]) -> Callable[P, Optional[T]]:
         @wraps(f)
         def timecap_wrapper(*args: P.args, **kwargs: P.kwargs) -> Optional[T]:

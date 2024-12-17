@@ -1,6 +1,6 @@
 [project]
 name = "overdue"
-version = "0.1.3"
+version = "0.1.5"
 description = "Easy timeout actions for any Python code with contextmanagers or decorators"
 readme = "README.md"
 authors = [

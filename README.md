@@ -19,10 +19,11 @@ if timeout.triggered:
 ```
 With an exception:
 ```python
+from datetime import timedelta
 from overdue import timeout_set_to, TaskAbortedError
 
 try:
-    with timeout_set_to(0.25, raise_exception=True):
+    with timeout_set_to(timedelta(milliseconds=250), raise_exception=True):
         # Slow code
 except TaskAbortedError:
     # Handle timeout
