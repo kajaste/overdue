@@ -1,7 +1,12 @@
 # Overdue - Raise a timeout when Python code takes too long to run
 [![PyPI version](http://img.shields.io/pypi/v/overdue)](https://pypi.python.org/pypi/overdue)
 
-Conveniently stop Python code from running when it is taking too long on Python 3.10+.
+Conveniently stop Python code from running when it is taking too long on Python >=3.10.
+This can be useful for example when using libraries that do not allow setting timeouts,
+your own code has semi-infinite loops in corner cases, or you just want to maintain fast
+response times for example when serving semi-realtime HTTP or gRPC requests coming over
+a network.
+
 Ships with type annotations and depends at runtime on nothing but Python itself.
 
 For older Pythons, consider [stopit](https://github.com/glenfant/stopit).
