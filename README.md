@@ -1,4 +1,6 @@
-# Overdue
+# Overdue - Raise a timeout when Python code takes too long to run
+[![PyPI version](http://img.shields.io/pypi/v/overdue)](https://pypi.python.org/pypi/overdue)
+
 Conveniently stop Python code from running when it is taking too long on Python 3.10+.
 Ships with type annotations and depends at runtime on nothing but Python itself.
 
